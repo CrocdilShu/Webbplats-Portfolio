@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio — Raspberry Pi Pico projects, database design, and reflections on modern software development.">
+    <title>Portfolio — Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="active">Hem</a></li>
+                <li><a href="projects.html">Projekt</a></li>
+                <li><a href="database.html">Databas</a></li>
+                <li><a href="reflection.html">Reflektion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <p class="hero-label fade-in">Välkommen</p>
+            <h1 class="hero-title fade-in delay-1">
+                Teknik, kreativitet<br>
+                <span class="hero-accent">&amp; design.</span>
+            </h1>
+            <p class="hero-description fade-in delay-2">
+                En portfolio som visar mina projekt inom hårdvaruprogrammering 
+                med Raspberry Pi Pico, databasdesign och reflektioner kring 
+                modern mjukvaruutveckling.
+            </p>
+            <div class="hero-cta fade-in delay-3">
+                <a href="projects.html" class="btn btn-primary">Se projekt</a>
+                <a href="reflection.html" class="btn btn-secondary">Läs reflektion</a>
+            </div>
+        </div>
+        <div class="hero-scroll fade-in delay-4">
+            <span>Scrolla ner</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-grid">
+                <div class="section-label">
+                    <span class="label-tag fade-in">01</span>
+                    <h2 class="label-title fade-in">Om mig</h2>
+                </div>
+                <div class="section-content">
+                    <p class="content-lead fade-in">
+                        Jag studerar webbutveckling och har ett stort intresse 
+                        för att kombinera hårdvara och mjukvara.
+                    </p>
+                    <p class="content-body fade-in">
+                        Den här portfolion samlar mina senaste projekt: från att 
+                        programmera mikrokontrollers med MicroPython till att 
+                        designa relationsdatabaser för verkliga tillämpningar. 
+                        Jag utforskar också hur AI förändrar sättet vi utvecklar 
+                        programvara — det som ibland kallas "Vibe Coding".
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Cards -->
+    <section class="section section-dark" id="overview">
+        <div class="container">
+            <div class="section-grid">
+                <div class="section-label">
+                    <span class="label-tag fade-in">02</span>
+                    <h2 class="label-title fade-in">Innehåll</h2>
+                </div>
+                <div class="section-content">
+                    <div class="card-grid">
+                        <a href="projects.html" class="card fade-in" id="card-projects">
+                            <span class="card-number">01</span>
+                            <h3 class="card-title">Raspberry Pi Pico</h3>
+                            <p class="card-desc">Två projekt: ett NeoPixel-klocka och en Home/Away-poängtavla med hårdvarukopplingar.</p>
+                            <span class="card-link">Se projekt →</span>
+                        </a>
+                        <a href="database.html" class="card fade-in" id="card-database">
+                            <span class="card-number">02</span>
+                            <h3 class="card-title">Cafe Norra</h3>
+                            <p class="card-desc">En relationsdatabas med fem tabeller för kafé-hantering av lager, leverantörer och ordrar.</p>
+                            <span class="card-link">Se databas →</span>
+                        </a>
+                        <a href="reflection.html" class="card fade-in" id="card-reflection">
+                            <span class="card-number">03</span>
+                            <h3 class="card-title">Vibe Coding</h3>
+                            <p class="card-desc">En reflektion om AI-drivet kodande — fördelar, nackdelar och framtidens utveckling.</p>
+                            <span class="card-link">Läs reflektion →</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-copy">&copy; 2026 Portfolio</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Hem</a></li>
+                    <li><a href="projects.html">Projekt</a></li>
+                    <li><a href="database.html">Databas</a></li>
+                    <li><a href="reflection.html">Reflektion</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
