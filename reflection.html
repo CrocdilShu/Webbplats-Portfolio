@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reflektion om Vibe Coding — AI-drivet kodande, fördelar och nackdelar.">
+    <title>Portfolio — Reflektion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Hem</a></li>
+                <li><a href="projects.html">Projekt</a></li>
+                <li><a href="database.html">Databas</a></li>
+                <li><a href="reflection.html" class="active">Reflektion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <p class="page-label fade-in">Reflektion</p>
+            <h1 class="page-title fade-in delay-1">Vibe Coding</h1>
+            <p class="page-desc fade-in delay-2">Tankar om AI-drivet kodande och hur det förändrar mjukvaruutveckling.</p>
+        </div>
+    </header>
+
+    <section class="section" id="reflection-intro">
+        <div class="container">
+            <div class="reflection-layout">
+                <div class="reflection-sidebar fade-in">
+                    <div class="sidebar-sticky">
+                        <h3 class="sidebar-title">Innehåll</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#reflection-intro">Introduktion</a></li>
+                            <li><a href="#advantages">Fördelar</a></li>
+                            <li><a href="#disadvantages">Nackdelar</a></li>
+                            <li><a href="#conclusion">Slutsats</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reflection-content">
+                    <div class="reflection-block fade-in">
+                        <p class="content-lead">"Vibe Coding" är ett modernt angreppssätt för mjukvaruutveckling där man i hög grad förlitar sig på AI-driven kodgenerering, med fokus på intentionen och "viben" av det önskade resultatet snarare än att skriva varje rad syntax manuellt.</p>
+                    </div>
+
+                    <blockquote class="pull-quote fade-in">
+                        <p>Man beskriver vad man vill uppnå — och AI:n skriver koden.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark" id="advantages">
+        <div class="container">
+            <div class="reflection-layout">
+                <div class="reflection-sidebar"></div>
+                <div class="reflection-content">
+                    <h2 class="reflection-heading fade-in">
+                        <span class="heading-number">01</span>
+                        Fördelar
+                    </h2>
+                    <div class="pros-cons-grid">
+                        <div class="pro-con-card pro fade-in">
+                            <div class="pc-icon">⚡</div>
+                            <h3>Hastighet</h3>
+                            <p>Det går betydligt snabbare att gå från idé till fungerande prototyp. Vad som tidigare tog dagar kan nu vara klart på timmar.</p>
+                        </div>
+                        <div class="pro-con-card pro fade-in">
+                            <div class="pc-icon">🚪</div>
+                            <h3>Lågtröskel</h3>
+                            <p>Det sänker tröskeln för att börja koda; man kan fokusera på logik snarare än att fastna i semantiska fel.</p>
+                        </div>
+                        <div class="pro-con-card pro fade-in">
+                            <div class="pc-icon">🧩</div>
+                            <h3>Problemlösning</h3>
+                            <p>AI:n kan snabbt föreslå lösningar på buggar som annars hade tagit lång tid att googla fram.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="disadvantages">
+        <div class="container">
+            <div class="reflection-layout">
+                <div class="reflection-sidebar"></div>
+                <div class="reflection-content">
+                    <h2 class="reflection-heading fade-in">
+                        <span class="heading-number">02</span>
+                        Nackdelar
+                    </h2>
+                    <div class="pros-cons-grid">
+                        <div class="pro-con-card con fade-in">
+                            <div class="pc-icon">🧠</div>
+                            <h3>Bristande djupförståelse</h3>
+                            <p>Om man enbart förlitar sig på AI riskerar man att inte förstå hur koden faktiskt fungerar, vilket gör det svårt att felsöka när AI:n gör fel.</p>
+                        </div>
+                        <div class="pro-con-card con fade-in">
+                            <div class="pc-icon">👻</div>
+                            <h3>Hallucinationer</h3>
+                            <p>AI:n kan ibland föreslå bibliotek eller metoder som inte finns, vilket leder till frustrerande "dead ends".</p>
+                        </div>
+                        <div class="pro-con-card con fade-in">
+                            <div class="pc-icon">🔒</div>
+                            <h3>Säkerhet</h3>
+                            <p>Utan granskning kan man ovetandes inkludera osäker kod eller dåliga mönster i sin applikation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark" id="conclusion">
+        <div class="container">
+            <div class="reflection-layout">
+                <div class="reflection-sidebar"></div>
+                <div class="reflection-content">
+                    <h2 class="reflection-heading fade-in">
+                        <span class="heading-number">03</span>
+                        Slutsats
+                    </h2>
+                    <div class="reflection-block fade-in">
+                        <p class="content-body">Vibe Coding är ett kraftfullt verktyg som kan accelerera utvecklingsprocessen markant, men det ersätter inte behovet av grundläggande programmeringskunskaper. Den bästa strategin är att använda AI som en samarbetspartner — inte som en ersättning — och att alltid granska, förstå och testa den genererade koden.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-copy">&copy; 2026 Portfolio</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Hem</a></li>
+                    <li><a href="projects.html">Projekt</a></li>
+                    <li><a href="database.html">Databas</a></li>
+                    <li><a href="reflection.html">Reflektion</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
