@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Raspberry Pi Pico-projekt — NeoPixel Clock och Home/Away Scoreboard.">
+    <title>Portfolio — Projekt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Hem</a></li>
+                <li><a href="projects.html" class="active">Projekt</a></li>
+                <li><a href="database.html">Databas</a></li>
+                <li><a href="reflection.html">Reflektion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <p class="page-label fade-in">Projekt</p>
+            <h1 class="page-title fade-in delay-1">Raspberry Pi Pico</h1>
+            <p class="page-desc fade-in delay-2">Två projekt byggda med Raspberry Pi Pico och MicroPython.</p>
+        </div>
+    </header>
+
+    <!-- Project 1: NeoPixel Clock -->
+    <section class="section" id="neopixel">
+        <div class="container">
+            <div class="project-header">
+                <div class="project-meta fade-in">
+                    <span class="project-number">Projekt 01</span>
+                    <span class="project-tag">MicroPython</span>
+                    <span class="project-tag">WS2812</span>
+                    <span class="project-tag">PIO</span>
+                </div>
+                <h2 class="project-title fade-in">NeoPixel Clock</h2>
+                <p class="project-desc fade-in">En analog klocka med 24 WS2812 NeoPixel-LEDs. Timmar visas i röd, minuter i gul och sekunder i grön. PIO hanterar det tidskritiska WS2812-protokollet.</p>
+            </div>
+            <div class="project-details fade-in">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <h4>Komponenter</h4>
+                        <ul><li>Raspberry Pi Pico</li><li>24× WS2812 NeoPixel LEDs</li><li>RTC (Real-Time Clock)</li></ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Färgkodning</h4>
+                        <ul>
+                            <li><span class="color-dot color-red"></span> Röd — Timmar</li>
+                            <li><span class="color-dot color-yellow"></span> Gul — Minuter</li>
+                            <li><span class="color-dot color-green"></span> Grön — Sekunder</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="code-block fade-in">
+                <div class="code-header">
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                    <span class="code-filename">neopixel.py</span>
+                    <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
+                </div>
+                <pre><code># Example using PIO to drive a set of WS2812 LEDs.
+
+import array, time
+from machine import Pin, RTC
+import rp2
+rtc = RTC()
+NUM_LEDS = 24
+PIN_NUM = 6
+brightness = 0.02
+
+@rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW,
+             out_shiftdir=rp2.PIO.SHIFT_LEFT,
+             autopull=True, pull_thresh=24)
+def ws2812():
+    T1 = 2
+    T2 = 5
+    T3 = 3
+    wrap_target()
+    label("bitloop")
+    out(x, 1)               .side(0)    [T3 - 1]
+    jmp(not_x, "do_zero")   .side(1)    [T1 - 1]
+    jmp("bitloop")          .side(1)    [T2 - 1]
+    label("do_zero")
+    nop()                   .side(0)    [T2 - 1]
+    wrap()
+
+sm = rp2.StateMachine(0, ws2812, freq=8_000_000,
+                       sideset_base=Pin(PIN_NUM))
+sm.active(1)
+ar = array.array("I", [0 for _ in range(NUM_LEDS)])
+
+def pixels_show():
+    dimmer_ar = array.array("I", [0 for _ in range(NUM_LEDS)])
+    for i, c in enumerate(ar):
+        r = int(((c >> 8) & 0xFF) * brightness)
+        g = int(((c >> 16) & 0xFF) * brightness)
+        b = int((c & 0xFF) * brightness)
+        dimmer_ar[i] = (g<<16) + (r<<8) + b
+    sm.put(dimmer_ar, 8)
+    time.sleep_ms(10)
+
+def pixels_set(i, color):
+    ar[i] = (color[1]<<16) + (color[0]<<8) + color[2]
+
+def pixels_fill(color):
+    for i in range(len(ar)):
+        pixels_set(i, color)
+
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 150, 0)
+GREEN = (0, 255, 0)
+
+while True:
+    t = rtc.datetime()
+    h, m, s = t[4], t[5], t[6]
+    pixels_fill(BLACK)
+    sec_led = int(s / 5) * 2
+    min_led = int(m / 5) * 2
+    hour_led = (h % 12) * 2
+    pixels_set(sec_led, GREEN)
+    pixels_set(min_led, YELLOW)
+    pixels_set(hour_led, RED)
+    pixels_show()
+    time.sleep(0.1)</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><div class="container"><hr></div></div>
+
+    <!-- Project 2: Home/Away -->
+    <section class="section" id="homeaway">
+        <div class="container">
+            <div class="project-header">
+                <div class="project-meta fade-in">
+                    <span class="project-number">Projekt 02</span>
+                    <span class="project-tag">MicroPython</span>
+                    <span class="project-tag">7-segment</span>
+                    <span class="project-tag">OLED</span>
+                </div>
+                <h2 class="project-title fade-in">Home/Away Scoreboard</h2>
+                <p class="project-desc fade-in">En poängtavla med MAX7219 7-segment display och SSD1306 OLED. Sex knappar styr poäng, reset och goal-animation med buzzer-ljudeffekt.</p>
+            </div>
+            <div class="project-details fade-in">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <h4>Komponenter</h4>
+                        <ul><li>Raspberry Pi Pico</li><li>MAX7219 7-segment</li><li>SSD1306 OLED 128×64</li><li>Piezo-buzzer</li><li>6× knappar</li></ul>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Protokoll</h4>
+                        <ul><li>SPI — Display</li><li>I2C — OLED</li><li>PWM — Buzzer</li></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="project-image fade-in">
+                <div class="image-frame">
+                    <img src="images/fritzing-homeaway.png" alt="Fritzing kopplingsschema" loading="lazy">
+                </div>
+                <p class="image-caption">Kopplingsschema i Fritzing</p>
+            </div>
+            <div class="code-block fade-in">
+                <div class="code-header">
+                    <div class="code-dots"><span></span><span></span><span></span></div>
+                    <span class="code-filename">HomeAway-2.py</span>
+                    <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
+                </div>
+                <pre><code>from machine import Pin, SPI, PWM, I2C
+import max7219_8digit
+import ssd1306
+import time
+
+spi = SPI(0, baudrate=10000000, polarity=1, phase=0,
+          sck=Pin(2), mosi=Pin(3))
+ss = Pin(5, Pin.OUT)
+display = max7219_8digit.Display(spi, ss)
+
+i2c = I2C(0, scl=Pin(1), sda=Pin(0), freq=400000)
+oled = ssd1306.SSD1306_I2C(128, 64, i2c)
+oled.fill(0)
+oled.show()
+
+home_plus  = Pin(6,  Pin.IN, Pin.PULL_UP)
+home_minus = Pin(7,  Pin.IN, Pin.PULL_UP)
+away_plus  = Pin(8,  Pin.IN, Pin.PULL_UP)
+away_minus = Pin(9,  Pin.IN, Pin.PULL_UP)
+reset_btn  = Pin(10, Pin.IN, Pin.PULL_UP)
+goal_btn   = Pin(11, Pin.IN, Pin.PULL_UP)
+
+buzzer = PWM(Pin(16))
+buzzer.duty_u16(0)
+
+home_score = 0
+away_score = 0
+display.write_to_buffer("H-00A-00")
+display.display()
+
+while True:
+    if home_plus.value() == 0:
+        if home_score < 99:
+            home_score += 1
+        time.sleep(0.2)
+
+    if home_minus.value() == 0:
+        if home_score > 0:
+            home_score -= 1
+        time.sleep(0.2)
+
+    if away_plus.value() == 0:
+        if away_score < 99:
+            away_score += 1
+        time.sleep(0.2)
+
+    if away_minus.value() == 0:
+        if away_score > 0:
+            away_score -= 1
+        time.sleep(0.2)
+
+    if reset_btn.value() == 0:
+        home_score = 0
+        away_score = 0
+        time.sleep(0.2)
+
+    if goal_btn.value() == 0:
+        buzzer.duty_u16(30000)
+        for f in [600, 900, 1200]:
+            buzzer.freq(f)
+            time.sleep(0.2)
+        buzzer.duty_u16(0)
+        oled.fill(1)
+        oled.text("GOAL!", 44, 28, 0)
+        oled.show()
+        time.sleep(2)
+        oled.fill(0)
+        oled.show()
+
+    display_text = "H-{:02d}A-{:02d}".format(
+        home_score, away_score)
+    display.write_to_buffer(display_text)
+    display.display()
+    time.sleep(0.01)</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-copy">&copy; 2026 Portfolio</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Hem</a></li>
+                    <li><a href="projects.html">Projekt</a></li>
+                    <li><a href="database.html">Databas</a></li>
+                    <li><a href="reflection.html">Reflektion</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>

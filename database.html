@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cafe Norra — En relationsdatabas för kafé-hantering med SQL.">
+    <title>Portfolio — Databas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav" id="main-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Portfolio</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Hem</a></li>
+                <li><a href="projects.html">Projekt</a></li>
+                <li><a href="database.html" class="active">Databas</a></li>
+                <li><a href="reflection.html">Reflektion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <p class="page-label fade-in">Databas</p>
+            <h1 class="page-title fade-in delay-1">Cafe Norra</h1>
+            <p class="page-desc fade-in delay-2">En relationsdatabas för kafé-hantering — lager, leverantörer och kundordrar.</p>
+        </div>
+    </header>
+
+    <section class="section" id="db-overview">
+        <div class="container">
+            <div class="section-grid">
+                <div class="section-label">
+                    <span class="label-tag fade-in">Mål</span>
+                    <h2 class="label-title fade-in">Översikt</h2>
+                </div>
+                <div class="section-content">
+                    <p class="content-lead fade-in">Att designa en relationsdatabas för kafé-hantering som säkerställer effektiv dataspårning för lager, leverantörer och kundordrar.</p>
+                    <p class="content-body fade-in">Tabellerna är länkade via Foreign Keys. Exempelvis kopplar <strong>LeverantörsId</strong> tabellen Artiklar till Leverantörer, och <strong>OrderId</strong> kopplar Orderdetaljer till Orderhuvud.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ER Diagram -->
+    <section class="section section-dark" id="er-diagram">
+        <div class="container">
+            <h2 class="db-section-title fade-in">Relationsdiagram</h2>
+            <div class="er-diagram fade-in">
+                <div class="er-table" id="er-leverantorer">
+                    <div class="er-table-header">Leverantörer</div>
+                    <div class="er-table-row er-pk">🔑 LeverantörsId</div>
+                    <div class="er-table-row">Namn</div>
+                    <div class="er-table-row">Kontaktperson</div>
+                    <div class="er-table-row">Telefon</div>
+                </div>
+                <div class="er-connector">←</div>
+                <div class="er-table" id="er-artiklar">
+                    <div class="er-table-header">Artiklar</div>
+                    <div class="er-table-row er-pk">🔑 ArtikelId</div>
+                    <div class="er-table-row">Artikelnamn</div>
+                    <div class="er-table-row">Pris</div>
+                    <div class="er-table-row er-fk">🔗 LeverantörsId</div>
+                </div>
+                <div class="er-connector">→</div>
+                <div class="er-table-group">
+                    <div class="er-table" id="er-kunder">
+                        <div class="er-table-header">Kunder</div>
+                        <div class="er-table-row er-pk">🔑 KundId</div>
+                        <div class="er-table-row">Namn</div>
+                        <div class="er-table-row">Email</div>
+                        <div class="er-table-row">Telefon</div>
+                    </div>
+                    <div class="er-table" id="er-orderhuvud">
+                        <div class="er-table-header">Orderhuvud</div>
+                        <div class="er-table-row er-pk">🔑 OrderId</div>
+                        <div class="er-table-row">Orderdatum</div>
+                        <div class="er-table-row er-fk">🔗 KundId</div>
+                    </div>
+                    <div class="er-table" id="er-orderdetaljer">
+                        <div class="er-table-header">Orderdetaljer</div>
+                        <div class="er-table-row er-pk">🔑 DetaljId</div>
+                        <div class="er-table-row er-fk">🔗 OrderId</div>
+                        <div class="er-table-row er-fk">🔗 ArtikelId</div>
+                        <div class="er-table-row">Antal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tables Detail -->
+    <section class="section" id="db-tables">
+        <div class="container">
+            <h2 class="db-section-title fade-in">Tabellstruktur</h2>
+
+            <div class="db-table-card fade-in">
+                <h3>Artiklar</h3>
+                <p>Innehåller alla produkter som kaféet säljer.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Kolumn</th><th>Datatyp</th><th>Nyckel</th><th>Beskrivning</th></tr></thead>
+                        <tbody>
+                            <tr><td>ArtikelId</td><td>INT</td><td>PK</td><td>Unikt artikel-ID</td></tr>
+                            <tr><td>Artikelnamn</td><td>VARCHAR</td><td>—</td><td>Produktnamn</td></tr>
+                            <tr><td>Pris</td><td>DECIMAL</td><td>—</td><td>Pris i SEK</td></tr>
+                            <tr><td>LeverantörsId</td><td>INT</td><td>FK</td><td>Koppling till Leverantörer</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="db-table-card fade-in">
+                <h3>Leverantörer</h3>
+                <p>Alla leverantörer som förser kaféet med varor.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Kolumn</th><th>Datatyp</th><th>Nyckel</th><th>Beskrivning</th></tr></thead>
+                        <tbody>
+                            <tr><td>LeverantörsId</td><td>INT</td><td>PK</td><td>Unikt leverantörs-ID</td></tr>
+                            <tr><td>Namn</td><td>VARCHAR</td><td>—</td><td>Företagsnamn</td></tr>
+                            <tr><td>Kontaktperson</td><td>VARCHAR</td><td>—</td><td>Kontaktpersonens namn</td></tr>
+                            <tr><td>Telefon</td><td>VARCHAR</td><td>—</td><td>Telefonnummer</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="db-table-card fade-in">
+                <h3>Kunder</h3>
+                <p>Registrerade kunder hos kaféet.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Kolumn</th><th>Datatyp</th><th>Nyckel</th><th>Beskrivning</th></tr></thead>
+                        <tbody>
+                            <tr><td>KundId</td><td>INT</td><td>PK</td><td>Unikt kund-ID</td></tr>
+                            <tr><td>Namn</td><td>VARCHAR</td><td>—</td><td>Kundens namn</td></tr>
+                            <tr><td>Email</td><td>VARCHAR</td><td>—</td><td>E-postadress</td></tr>
+                            <tr><td>Telefon</td><td>VARCHAR</td><td>—</td><td>Telefonnummer</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="db-table-card fade-in">
+                <h3>Orderhuvud</h3>
+                <p>Huvudinformation för varje order.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Kolumn</th><th>Datatyp</th><th>Nyckel</th><th>Beskrivning</th></tr></thead>
+                        <tbody>
+                            <tr><td>OrderId</td><td>INT</td><td>PK</td><td>Unikt order-ID</td></tr>
+                            <tr><td>Orderdatum</td><td>DATE</td><td>—</td><td>Datum för ordern</td></tr>
+                            <tr><td>KundId</td><td>INT</td><td>FK</td><td>Koppling till Kunder</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="db-table-card fade-in">
+                <h3>Orderdetaljer</h3>
+                <p>Enskilda rader i en order med artiklar och antal.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Kolumn</th><th>Datatyp</th><th>Nyckel</th><th>Beskrivning</th></tr></thead>
+                        <tbody>
+                            <tr><td>DetaljId</td><td>INT</td><td>PK</td><td>Unikt detalj-ID</td></tr>
+                            <tr><td>OrderId</td><td>INT</td><td>FK</td><td>Koppling till Orderhuvud</td></tr>
+                            <tr><td>ArtikelId</td><td>INT</td><td>FK</td><td>Koppling till Artiklar</td></tr>
+                            <tr><td>Antal</td><td>INT</td><td>—</td><td>Antal beställda</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-copy">&copy; 2026 Portfolio</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Hem</a></li>
+                    <li><a href="projects.html">Projekt</a></li>
+                    <li><a href="database.html">Databas</a></li>
+                    <li><a href="reflection.html">Reflektion</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
