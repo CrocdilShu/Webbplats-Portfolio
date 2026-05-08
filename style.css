@@ -1020,3 +1020,261 @@ tbody tr:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+   LANGUAGE SWITCHER
+   ============================================ */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: var(--space-md);
+    flex-shrink: 0;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 4px 7px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+.lang-btn:hover { color: var(--color-text); }
+.lang-btn.active {
+    color: var(--color-accent);
+    background: var(--color-accent-glow);
+}
+.lang-sep {
+    font-size: 0.7rem;
+    color: var(--color-border);
+    pointer-events: none;
+}
+
+/* ============================================
+   GITHUB BUTTON & NAV ICON
+   ============================================ */
+.btn-github {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: var(--transition);
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-sans);
+    text-decoration: none;
+}
+.btn-github:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: 0 0 18px var(--color-accent-glow);
+    transform: translateY(-1px);
+}
+.nav-github {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-muted) !important;
+    transition: var(--transition);
+}
+.nav-github:hover { color: var(--color-accent) !important; }
+
+/* ============================================
+   SKILLS GRID
+   ============================================ */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+.skill-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    padding: var(--space-lg) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+.skill-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-accent-glow), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+}
+.skill-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--color-accent-glow);
+}
+.skill-card:hover::before { opacity: 1; }
+.skill-icon { font-size: 2rem; margin-bottom: var(--space-xs); }
+.skill-title { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; }
+.skill-desc { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7; flex: 1; }
+.skill-badge {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    background: var(--color-accent-glow);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    align-self: flex-start;
+}
+
+/* ============================================
+   CONTACT FORM
+   ============================================ */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 600px;
+}
+.form-group { position: relative; }
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    padding: 1.4rem 1rem 0.6rem;
+    outline: none;
+    transition: var(--transition);
+    resize: vertical;
+    border-radius: 0;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+.form-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    pointer-events: none;
+    transition: var(--transition);
+}
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+    top: 0.3rem;
+    font-size: 0.63rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   FOOTER UPDATE
+   ============================================ */
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.footer-easter {
+    font-size: 1rem;
+    cursor: help;
+    opacity: 0.4;
+    transition: var(--transition);
+    animation: floatBob 3s ease-in-out infinite;
+}
+.footer-easter:hover { opacity: 1; }
+@keyframes floatBob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-4px); }
+}
+
+/* ============================================
+   ENHANCED CARD GLOW ON HOVER
+   ============================================ */
+.card { position: relative; overflow: hidden; }
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-accent-glow), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+}
+.card:hover::after { opacity: 1; }
+
+/* ============================================
+   KONAMI CODE OVERLAY
+   ============================================ */
+.konami-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 11, 0.93);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.konami-overlay.active { opacity: 1; pointer-events: auto; }
+.konami-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    animation: konamiPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes konamiPop {
+    from { transform: scale(0.4); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+.konami-text {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 40px var(--color-accent-glow);
+}
+.konami-sub { font-size: 1rem; color: var(--color-text-secondary); letter-spacing: 0.06em; }
+.konami-pixels { display: flex; flex-direction: column; gap: 3px; }
+.pixel-row { display: flex; gap: 3px; }
+.pixel { width: 16px; height: 16px; background: transparent; }
+.pixel.pixel-on { background: var(--color-accent); box-shadow: 0 0 6px var(--color-accent); }
+.pixel.pixel-eye { background: #fff; box-shadow: 0 0 4px #fff; }
+
+/* ============================================
+   RESPONSIVE — new components
+   ============================================ */
+@media (max-width: 900px) {
+    .skills-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+    .lang-switcher { margin-left: auto; }
+    .skills-grid { grid-template-columns: 1fr; }
+}
