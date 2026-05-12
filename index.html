@@ -21,9 +21,7 @@
         <div class="nav-inner">
             <a href="index.html" class="nav-logo">Portfolio</a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html" class="active" data-sv="Hem" data-en="Home">Hem</a></li>
@@ -45,6 +43,9 @@
 
     <!-- Hero Section -->
     <header class="hero">
+        <!-- Bubble water field -->
+        <div class="bubble-field" id="bubble-field" aria-hidden="true"></div>
+
         <div class="hero-content">
             <p class="hero-label fade-in" data-sv="Välkommen" data-en="Welcome">Välkommen</p>
             <h1 class="hero-title fade-in delay-1">
@@ -60,7 +61,7 @@
             </p>
             <div class="hero-cta fade-in delay-3">
                 <a href="projects.html" class="btn btn-primary" data-sv="Se projekt" data-en="View projects">Se projekt</a>
-                <a href="#contact" class="btn btn-secondary" data-sv="Kontakta mig" data-en="Contact me">Kontakta mig</a>
+                <a href="reflection.html" class="btn btn-secondary" data-sv="Läs reflektion" data-en="Read reflection">Läs reflektion</a>
                 <a href="https://github.com/CrocdilShu" target="_blank" rel="noopener" class="btn btn-github">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:0.5rem"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
                     GitHub
@@ -98,7 +99,7 @@
     </section>
 
     <!-- Experience / Skills Section -->
-    <section class="section section-dark" id="experience">
+    <section class="section section-dark section-highlight" id="experience">
         <div class="container">
             <div class="section-grid">
                 <div class="section-label">
@@ -107,24 +108,49 @@
                 </div>
                 <div class="section-content">
                     <div class="skills-grid">
+
+                        <!-- AWS Cert -->
                         <div class="skill-card fade-in">
                             <div class="skill-icon">☁️</div>
                             <h3 class="skill-title" data-sv="AWS Cloud" data-en="AWS Cloud">AWS Cloud</h3>
-                            <p class="skill-desc" data-sv="AWS Cloud Practitioner-certifikat. Grundläggande förståelse för molntjänster, S3, EC2 och IAM." data-en="AWS Cloud Practitioner certified. Foundational understanding of cloud services, S3, EC2, and IAM.">AWS Cloud Practitioner-certifikat. Grundläggande förståelse för molntjänster, S3, EC2 och IAM.</p>
-                            <span class="skill-badge">Certifierad</span>
+                            <p class="skill-desc"
+                                data-sv="AWS Academy Graduate – Cloud Foundations. Grundläggande förståelse för molntjänster, S3, EC2, IAM och molnarkitektur."
+                                data-en="AWS Academy Graduate – Cloud Foundations. Foundational understanding of cloud services, S3, EC2, IAM and cloud architecture.">
+                                AWS Academy Graduate – Cloud Foundations. Grundläggande förståelse för molntjänster, S3, EC2, IAM och molnarkitektur.
+                            </p>
+                            <a href="https://www.credly.com/badges/59506677-bf1f-4d52-91ec-8e39c42b898f"
+                               target="_blank" rel="noopener"
+                               class="cert-badge"
+                               data-sv="Visa certifikat ↗" data-en="View certificate ↗">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                Visa certifikat ↗
+                            </a>
                         </div>
+
+                        <!-- JS 2D Games -->
                         <div class="skill-card fade-in">
                             <div class="skill-icon">🎮</div>
                             <h3 class="skill-title" data-sv="JavaScript &amp; 2D-spel" data-en="JavaScript &amp; 2D Games">JavaScript &amp; 2D-spel</h3>
-                            <p class="skill-desc" data-sv="Intresserad av spelutveckling med vanilla JS och Canvas API. Jobbar med spelmekanik, kollisionsdetektering och spelloop-design." data-en="Passionate about game development with vanilla JS and the Canvas API. Working with game mechanics, collision detection and game loop design.">Intresserad av spelutveckling med vanilla JS och Canvas API. Jobbar med spelmekanik, kollisionsdetektering och spelloop-design.</p>
+                            <p class="skill-desc"
+                                data-sv="Intresserad av spelutveckling med vanilla JS och Canvas API. Arbetar med spelmekanik, kollisionsdetektering och spelloop-design."
+                                data-en="Passionate about game development with vanilla JS and the Canvas API. Working with game mechanics, collision detection and game loop design.">
+                                Intresserad av spelutveckling med vanilla JS och Canvas API. Arbetar med spelmekanik, kollisionsdetektering och spelloop-design.
+                            </p>
                             <span class="skill-badge" data-sv="Pågående" data-en="In progress">Pågående</span>
                         </div>
+
+                        <!-- Languages -->
                         <div class="skill-card fade-in">
                             <div class="skill-icon">🌐</div>
                             <h3 class="skill-title" data-sv="Tre språk" data-en="Three Languages">Tre språk</h3>
-                            <p class="skill-desc" data-sv="Flytande i svenska, engelska och rumänska. Erfarenhet av att arbeta i flerspråkiga och internationella miljöer." data-en="Fluent in Swedish, English and Romanian. Experienced working in multilingual and international environments.">Flytande i svenska, engelska och rumänska. Erfarenhet av att arbeta i flerspråkiga och internationella miljöer.</p>
+                            <p class="skill-desc"
+                                data-sv="Flytande i svenska, engelska och rumänska. Erfarenhet av att arbeta i flerspråkiga och internationella miljöer."
+                                data-en="Fluent in Swedish, English and Romanian. Experienced working in multilingual and international environments.">
+                                Flytande i svenska, engelska och rumänska. Erfarenhet av att arbeta i flerspråkiga och internationella miljöer.
+                            </p>
                             <span class="skill-badge" data-sv="Flytande" data-en="Fluent">Flytande</span>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -144,50 +170,31 @@
                         <a href="projects.html" class="card fade-in" id="card-projects">
                             <span class="card-number">01</span>
                             <h3 class="card-title" data-sv="Raspberry Pi Pico" data-en="Raspberry Pi Pico">Raspberry Pi Pico</h3>
-                            <p class="card-desc" data-sv="Tre projekt: ett LED-trafikljus, en NeoPixel-klocka och en Home/Away-poängtavla med hårdvarukopplingar." data-en="Three projects: an LED traffic light, a NeoPixel clock and a Home/Away scoreboard with hardware wiring.">Tre projekt: ett LED-trafikljus, en NeoPixel-klocka och en Home/Away-poängtavla med hårdvarukopplingar.</p>
+                            <p class="card-desc"
+                                data-sv="Tre projekt: ett LED-trafikljus, en NeoPixel-klocka och en Home/Away-poängtavla med hårdvarukopplingar."
+                                data-en="Three projects: an LED traffic light, a NeoPixel clock and a Home/Away scoreboard with hardware wiring.">
+                                Tre projekt: ett LED-trafikljus, en NeoPixel-klocka och en Home/Away-poängtavla med hårdvarukopplingar.</p>
                             <span class="card-link" data-sv="Se projekt →" data-en="View projects →">Se projekt →</span>
                         </a>
                         <a href="database.html" class="card fade-in" id="card-database">
                             <span class="card-number">02</span>
                             <h3 class="card-title" data-sv="Cafe Norra" data-en="Cafe Norra">Cafe Norra</h3>
-                            <p class="card-desc" data-sv="En relationsdatabas med fem tabeller för kafé-hantering av lager, leverantörer och ordrar." data-en="A relational database with five tables for café management of inventory, suppliers and orders.">En relationsdatabas med fem tabeller för kafé-hantering av lager, leverantörer och ordrar.</p>
+                            <p class="card-desc"
+                                data-sv="En relationsdatabas med fem tabeller för kafé-hantering av lager, leverantörer och ordrar."
+                                data-en="A relational database with five tables for café management of inventory, suppliers and orders.">
+                                En relationsdatabas med fem tabeller för kafé-hantering av lager, leverantörer och ordrar.</p>
                             <span class="card-link" data-sv="Se databas →" data-en="View database →">Se databas →</span>
                         </a>
                         <a href="reflection.html" class="card fade-in" id="card-reflection">
                             <span class="card-number">03</span>
                             <h3 class="card-title" data-sv="Vibe Coding" data-en="Vibe Coding">Vibe Coding</h3>
-                            <p class="card-desc" data-sv="En reflektion om AI-drivet kodande — fördelar, nackdelar och framtidens utveckling." data-en="A reflection on AI-driven coding — advantages, drawbacks and the future of development.">En reflektion om AI-drivet kodande — fördelar, nackdelar och framtidens utveckling.</p>
+                            <p class="card-desc"
+                                data-sv="En reflektion om AI-drivet kodande — fördelar, nackdelar och framtidens utveckling."
+                                data-en="A reflection on AI-driven coding — advantages, drawbacks and the future of development.">
+                                En reflektion om AI-drivet kodande — fördelar, nackdelar och framtidens utveckling.</p>
                             <span class="card-link" data-sv="Läs reflektion →" data-en="Read reflection →">Läs reflektion →</span>
                         </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section section-dark" id="contact">
-        <div class="container">
-            <div class="section-grid">
-                <div class="section-label">
-                    <span class="label-tag fade-in">04</span>
-                    <h2 class="label-title fade-in" data-sv="Kontakt" data-en="Contact">Kontakt</h2>
-                </div>
-                <div class="section-content">
-                    <p class="content-lead fade-in" data-sv="Har du ett projekt, en fråga eller vill bara säga hej?" data-en="Have a project, a question, or just want to say hi?">
-                        Har du ett projekt, en fråga eller vill bara säga hej?
-                    </p>
-                    <form action="https://formspree.io/f/DIN_UNIKA_ID" method="POST" class="contact-form fade-in" id="contact-form">
-                        <div class="form-group">
-                            <input type="email" name="email" id="contact-email" placeholder=" " required>
-                            <label for="contact-email" data-sv="Din e-post" data-en="Your email">Din e-post</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" id="contact-message" placeholder=" " rows="5" required></textarea>
-                            <label for="contact-message" data-sv="Ditt meddelande" data-en="Your message">Ditt meddelande</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary" data-sv="Skicka meddelande" data-en="Send message">Skicka meddelande</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -199,7 +206,6 @@
             <div class="footer-inner">
                 <div class="footer-left">
                     <p class="footer-copy">&copy; 2026 Portfolio</p>
-                    <p class="footer-easter" id="footer-easter" title="Try the Konami Code! ↑↑↓↓←→←→BA">🎮</p>
                 </div>
                 <ul class="footer-links">
                     <li><a href="index.html" data-sv="Hem" data-en="Home">Hem</a></li>
@@ -211,15 +217,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Konami Code Easter Egg overlay -->
-    <div class="konami-overlay" id="konami-overlay">
-        <div class="konami-content">
-            <div class="konami-pixels" id="konami-pixels"></div>
-            <p class="konami-text">KONAMI CODE AKTIVERAD! 🕹️</p>
-            <p class="konami-sub">+30 liv tillagda</p>
-        </div>
-    </div>
 
     <script src="main.js"></script>
 </body>

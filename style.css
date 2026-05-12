@@ -1,6 +1,6 @@
 /* ============================================
-   STYLE.CSS — Minimalist Portfolio
-   Bettina Sosa-inspired aesthetic
+   STYLE.CSS — Portfolio
+   RedMagic 11 Pro — White & Electric Blue
    ============================================ */
 
 /* --- Reset & Base --- */
@@ -11,23 +11,24 @@
 }
 
 :root {
-    --color-bg: #0A0A0B;
-    --color-bg-alt: #121214;
-    --color-surface: #18181B;
-    --color-text: #EDEDED;
-    --color-text-secondary: #A1A1AA;
-    --color-text-muted: #71717A;
-    --color-accent: #6366F1; /* Neon Purple/Indigo */
-    --color-accent-glow: rgba(99, 102, 241, 0.2);
-    --color-border: #27272A;
-    --color-border-light: #1F1F22;
-    --color-pro: #064E3B;
-    --color-pro-border: #059669;
-    --color-con: #78350F;
-    --color-con-border: #D97706;
-    --color-code-bg: #09090B;
-    --color-code-text: #E4E4E7;
-    --color-code-header: #121214;
+    --color-bg: #F8FAFF;
+    --color-bg-alt: #EEF3FF;
+    --color-surface: #FFFFFF;
+    --color-text: #060C2A;
+    --color-text-secondary: #3A4875;
+    --color-text-muted: #7B88BB;
+    --color-accent: #155EFF;          /* Electric blue — RedMagic LED */
+    --color-accent-2: #00C6FF;        /* Cyan highlight */
+    --color-accent-glow: rgba(21, 94, 255, 0.14);
+    --color-border: #D0DCFF;
+    --color-border-light: #E5ECFF;
+    --color-pro: #EAF9F1;
+    --color-pro-border: #34C77B;
+    --color-con: #FFF6E8;
+    --color-con-border: #F59E0B;
+    --color-code-bg: #0D1117;
+    --color-code-text: #E6EDF3;
+    --color-code-header: #161B22;
 
     --font-sans: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -90,10 +91,11 @@ ul { list-style: none; }
 }
 
 .nav.scrolled {
-    background: rgba(10, 10, 11, 0.85);
+    background: rgba(248, 250, 255, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--color-border-light);
+    box-shadow: 0 1px 24px rgba(21,94,255,0.06);
     padding: var(--space-sm) 0;
 }
 
@@ -213,12 +215,18 @@ ul { list-style: none; }
 }
 
 .hero-accent {
-    font-weight: 600;
+    font-weight: 700;
     font-style: italic;
-    background: linear-gradient(135deg, #6366F1, #A855F7);
+    background: linear-gradient(110deg, #155EFF 0%, #00C6FF 60%, #155EFF 100%);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 40px var(--color-accent-glow);
+    animation: shineBlue 4s linear infinite;
+}
+
+@keyframes shineBlue {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
 .hero-description {
@@ -1277,4 +1285,327 @@ tbody tr:hover {
 @media (max-width: 640px) {
     .lang-switcher { margin-left: auto; }
     .skills-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   BUBBLE WATER EFFECT
+   ============================================ */
+
+/* Hero gets a bubble canvas layer */
+.hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #F8FAFF 0%, #EEF3FF 100%);
+}
+
+.bubble-field {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-content,
+.hero-scroll {
+    position: relative;
+    z-index: 1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -120px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.5px solid rgba(21, 94, 255, 0.25);
+    box-shadow:
+        inset 0 0 12px rgba(0, 198, 255, 0.15),
+        0 0 8px rgba(21, 94, 255, 0.08);
+    animation: riseUp var(--dur, 8s) ease-in var(--delay, 0s) infinite;
+    opacity: 0;
+}
+
+/* Bubble shimmer highlight */
+.bubble::before {
+    content: '';
+    position: absolute;
+    top: 18%;
+    left: 20%;
+    width: 30%;
+    height: 20%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    filter: blur(2px);
+    transform: rotate(-30deg);
+}
+
+@keyframes riseUp {
+    0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+    10%  { opacity: 0.9; }
+    85%  { opacity: 0.6; }
+    100% { transform: translateY(-110vh) translateX(var(--drift, 40px)) scale(0.8); opacity: 0; }
+}
+
+/* Section highlight shimmer (blue outline glow) */
+.section-highlight {
+    position: relative;
+    border: 1px solid var(--color-border-light);
+    overflow: hidden;
+}
+
+.section-highlight::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(21, 94, 255, 0.12) 40%,
+        rgba(0, 198, 255, 0.18) 60%,
+        transparent 100%
+    );
+    background-size: 300% 100%;
+    animation: waterShimmer 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes waterShimmer {
+    0%   { background-position: 200% 0; }
+    50%  { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Skill card bubble glow — blue outlined */
+.skill-card {
+    border: 1.5px solid var(--color-border);
+    background: #FFFFFF;
+}
+
+.skill-card:hover {
+    border-color: var(--color-accent);
+    box-shadow:
+        0 0 0 3px var(--color-accent-glow),
+        0 16px 48px rgba(21, 94, 255, 0.12);
+}
+
+/* Card blue outline on hover */
+.card:hover {
+    border-color: var(--color-accent);
+    box-shadow:
+        0 0 0 2px var(--color-accent-glow),
+        0 12px 40px rgba(21, 94, 255, 0.10);
+}
+
+/* AWS Cert badge card */
+.cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(110deg, #EEF3FF, #F8FAFF);
+    border: 1.5px solid var(--color-accent);
+    border-radius: 8px;
+    margin-top: var(--space-sm);
+    text-decoration: none;
+    color: var(--color-accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.cert-badge::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(110deg, #155EFF, #00C6FF, #155EFF);
+    background-size: 200% auto;
+    border-radius: 9px;
+    z-index: -1;
+    animation: shineBlue 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.cert-badge:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--color-accent-glow);
+}
+
+.cert-badge:hover::before { opacity: 1; }
+
+.cert-badge svg { flex-shrink: 0; }
+
+/* Btn primary — white on blue */
+.btn-primary {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+    background-size: 200% auto;
+    animation: btnSheen 2.5s linear infinite;
+}
+
+@keyframes btnSheen {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.btn-primary:hover {
+    background: #0A4EE0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(21, 94, 255, 0.35);
+}
+
+/* Btn secondary — blue outlined */
+.btn-secondary {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1.5px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+    background: var(--color-accent-glow);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+
+/* Pull quote blue bar */
+.pull-quote {
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-accent-glow);
+}
+
+/* ============================================
+   COLLAPSIBLE CODE DROPDOWN
+   ============================================ */
+.code-dropdown {
+    margin: var(--space-lg) 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+.code-details {
+    background: var(--color-code-bg);
+}
+
+/* Remove default browser marker */
+.code-details > summary { list-style: none; }
+.code-details > summary::-webkit-details-marker { display: none; }
+
+.code-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem var(--space-md);
+    background: var(--color-code-header);
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--transition);
+    gap: var(--space-sm);
+}
+
+.code-summary:hover {
+    background: #1c2330;
+}
+
+.summary-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    min-width: 0;
+}
+
+.summary-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* Rotate chevron when open */
+.code-details[open] .summary-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.summary-toggle-icon {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: transform var(--transition);
+    margin-left: 0.25rem;
+}
+
+/* Download button */
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid rgba(21, 94, 255, 0.4);
+    color: var(--color-accent-2);
+    font-size: 0.72rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: rgba(21, 94, 255, 0.15);
+    border-color: var(--color-accent);
+    color: #fff;
+}
+
+/* Code block inside details — no extra shadow/radius since parent handles it */
+.code-details .code-block {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    /* Animate open */
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Collapsed label hint */
+.code-details:not([open]) .code-summary::after {
+    content: 'Klicka för att visa kod';
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-left: 0.5rem;
+    font-family: var(--font-sans);
+}
+
+@media (max-width: 640px) {
+    .code-details:not([open]) .code-summary::after {
+        display: none;
+    }
+    .summary-right {
+        gap: 0.3rem;
+    }
+    .btn-download span { display: none; }
 }

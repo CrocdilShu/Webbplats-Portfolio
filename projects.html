@@ -42,7 +42,7 @@
                     <span class="project-tag">I/O</span>
                     <span class="project-tag">Interrupts</span>
                 </div>
-                <h2 class="project-title fade-in">Interactive Traffic Light & Alarm</h2>
+                <h2 class="project-title fade-in">Interactive Traffic Light &amp; Alarm</h2>
                 <p class="project-desc fade-in">Ett grundläggande hårdvaruprojekt som demonstrerar hur man hanterar LEDs, en knapp med hardware interrupts, och en piezo-buzzer för att skapa ett sekventiellt trafikljus med inbyggd larmfunktion.</p>
             </div>
             <div class="project-details fade-in">
@@ -63,13 +63,26 @@
                 </div>
                 <p class="image-caption">Kopplingsschema i Fritzing (Ladda upp som images/fritzing-traffic-light.png)</p>
             </div>
-            <div class="code-block fade-in">
-                <div class="code-header">
-                    <div class="code-dots"><span></span><span></span><span></span></div>
-                    <span class="code-filename">traffic_alarm.py</span>
-                    <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
-                </div>
-                <pre><code>import machine
+
+            <!-- Collapsible code dropdown -->
+            <div class="code-dropdown fade-in">
+                <details class="code-details">
+                    <summary class="code-summary">
+                        <div class="summary-left">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-filename">traffic_alarm.py</span>
+                        </div>
+                        <div class="summary-right">
+                            <a href="traffic_alarm.py" download class="btn-download" title="Ladda ner fil">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Ladda ner
+                            </a>
+                            <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
+                            <span class="summary-toggle-icon">▾</span>
+                        </div>
+                    </summary>
+                    <div class="code-block">
+                        <pre><code>import machine
 import time
 
 led_red = machine.Pin(15, machine.Pin.OUT)
@@ -114,6 +127,8 @@ while True:
     time.sleep(5)
 
     led_amber.value(0)</code></pre>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
@@ -151,13 +166,26 @@ while True:
                 </div>
                 <p class="image-caption">Kopplingsschema i Fritzing (Ladda upp som images/fritzing-scoreboard.png)</p>
             </div>
-            <div class="code-block fade-in">
-                <div class="code-header">
-                    <div class="code-dots"><span></span><span></span><span></span></div>
-                    <span class="code-filename">scoreboard.py</span>
-                    <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
-                </div>
-                <pre><code>from machine import Pin, SPI, PWM, I2C
+
+            <!-- Collapsible code dropdown -->
+            <div class="code-dropdown fade-in">
+                <details class="code-details">
+                    <summary class="code-summary">
+                        <div class="summary-left">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-filename">scoreboard.py</span>
+                        </div>
+                        <div class="summary-right">
+                            <a href="scoreboard.py" download class="btn-download" title="Ladda ner fil">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Ladda ner
+                            </a>
+                            <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
+                            <span class="summary-toggle-icon">▾</span>
+                        </div>
+                    </summary>
+                    <div class="code-block">
+                        <pre><code>from machine import Pin, SPI, PWM, I2C
 import max7219_8digit 
 import ssd1306        #oled plugin
 import time           
@@ -196,22 +224,22 @@ display.display()
 while True:
     #om nedtryckt
     if home_plus.value() == 0:
-        if home_score < 99: #max 99 så inte blir konstigt på skärmen
+        if home_score &lt; 99: #max 99 så inte blir konstigt på skärmen
             home_score += 1
         time.sleep(0.2) 
 
     if home_minus.value() == 0:
-        if home_score > 0:
+        if home_score &gt; 0:
             home_score -= 1
         time.sleep(0.2)
 
     if away_plus.value() == 0:
-        if away_score < 99:
+        if away_score &lt; 99:
             away_score += 1
         time.sleep(0.2)
 
     if away_minus.value() == 0:
-        if away_score > 0:
+        if away_score &gt; 0:
             away_score -= 1
         time.sleep(0.2)
 
@@ -249,6 +277,8 @@ while True:
 
     #förhindra krasher
     time.sleep(0.01)</code></pre>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
@@ -290,13 +320,26 @@ while True:
                 </div>
                 <p class="image-caption">Kopplingsschema i Fritzing (Ladda upp som images/fritzing-neopixel.png)</p>
             </div>
-            <div class="code-block fade-in">
-                <div class="code-header">
-                    <div class="code-dots"><span></span><span></span><span></span></div>
-                    <span class="code-filename">neopixel_clock.py</span>
-                    <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
-                </div>
-                <pre><code># Example using PIO to drive a set of WS2812 LEDs.
+
+            <!-- Collapsible code dropdown -->
+            <div class="code-dropdown fade-in">
+                <details class="code-details">
+                    <summary class="code-summary">
+                        <div class="summary-left">
+                            <div class="code-dots"><span></span><span></span><span></span></div>
+                            <span class="code-filename">neopixel_clock.py</span>
+                        </div>
+                        <div class="summary-right">
+                            <a href="neopixel_clock.py" download class="btn-download" title="Ladda ner fil">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Ladda ner
+                            </a>
+                            <button class="code-copy" onclick="copyCode(this)" aria-label="Kopiera kod">Kopiera</button>
+                            <span class="summary-toggle-icon">▾</span>
+                        </div>
+                    </summary>
+                    <div class="code-block">
+                        <pre><code># Example using PIO to drive a set of WS2812 LEDs.
 import array, time
 from machine import Pin, RTC #rtc för datorstid
 import rp2
@@ -333,15 +376,15 @@ ar = array.array("I", [0 for _ in range(NUM_LEDS)])
 def pixels_show():
     dimmer_ar = array.array("I", [0 for _ in range(NUM_LEDS)])
     for i,c in enumerate(ar):
-        r = int(((c >> 8) & 0xFF) * brightness)
-        g = int(((c >> 16) & 0xFF) * brightness)
-        b = int((c & 0xFF) * brightness)
-        dimmer_ar[i] = (g<<16) + (r<<8) + b
+        r = int(((c &gt;&gt; 8) &amp; 0xFF) * brightness)
+        g = int(((c &gt;&gt; 16) &amp; 0xFF) * brightness)
+        b = int((c &amp; 0xFF) * brightness)
+        dimmer_ar[i] = (g&lt;&lt;16) + (r&lt;&lt;8) + b
     sm.put(dimmer_ar, 8)
     time.sleep_ms(10)
 
 def pixels_set(i, color):
-    ar[i] = (color[1]<<16) + (color[0]<<8) + color[2]
+    ar[i] = (color[1]&lt;&lt;16) + (color[0]&lt;&lt;8) + color[2]
 
 def pixels_fill(color):
     for i in range(len(ar)):
@@ -381,6 +424,8 @@ while True:
 
     pixels_show()
     time.sleep(0.1)</code></pre>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
